@@ -84,6 +84,19 @@ Attention可以直接建立任意两个Patch之间的联系。
 ### 终极思维导图（一句话串起来）
 ViT 是将图像切成块，通过线性投影变成统一维度的序列（Q1），塞进源自 BERT 的 Transformer 编码器（Q2/Q3）中。它先在大数据上预训练，微调时换头并小学习率精调（Q4）。与 CNN 自带先天几何本能（强归纳偏置）不同，ViT 的 2D 位置信息全靠随机初始化的位置编码在一维序列上通过反向传播“硬背”出来（Q5/Q6/Q7），因此它极度依赖大数据，但也因此获得了更强的全局建模上限。
 
+Image
+  ↓
+Patch Embedding
+  ↓
+[CLS] + Position Embedding
+  ↓
+Transformer Encoder × N
+  ↓
+CLS Token
+  ↓
+MLP Head
+  ↓
+Prediction
 
 
 
