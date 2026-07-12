@@ -78,4 +78,8 @@ Student已经学会：
 
 狗
 
+4.刚开始训练时，Teacher 并不是一个已经学会识别世界的模型，它只是 Student 参数的指数滑动平均（EMA），因此也不知道什么是狗、什么是猫。Student 学习 Teacher，并不是因为 Teacher "更正确"，而是因为 Teacher 的表示更加稳定（stable）。在 DINO 中，Teacher 只接收 Global View，因此能够得到更完整、更稳定的图像表示；而 Student 同时接收 Global View 和 Local View，并通过 Cross Entropy Loss 去匹配 Teacher 的输出分布。这样，Student 就必须学会 从局部推断整体（local-to-global correspondence），例如看到狗耳朵也能产生与整只狗相似的表示。随着训练不断进行，Teacher 也会随着 Student 的提升而不断提升，因此语义知识并不是 Teacher 一开始就拥有的，而是在 Teacher-Student 相互促进、不断保持一致的过程中**逐渐涌现（emerge）**出来的。DINO 的监督信号并不是"正确答案"，而是一个稳定的目标（stable target），这也是现代自监督学习的核心思想之一。
+
+现代自监督学习最重要的思想之一就是：模型学习的不是标签，而是世界中的一致性（consistency）；真正驱动模型获得语义能力的，不是人工监督，而是数据本身蕴含的结构。
+
 这就是local-to-global correspondence。
