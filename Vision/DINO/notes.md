@@ -98,5 +98,7 @@ Student已经学会：
 
 最后，再看看 Sharpening。这种技巧通过在 softmax 函数中加入一个 temperature 参数，来强制让模型将概率分布更加尖锐化。由于小差异会被夸大，这会防止所有激活值都是相同的，因为小的差异也会被放大。这个技巧和中心化操作搭配使用，可以使得激活值不断变化，从而引导学生模型更好地了解哪些特征应该变得更加强大。
 
+7.Teacher 的作用是为 Student 提供一个包含完整对象信息（Global Context）的稳定目标表示。Student 经常只能看到局部区域（如狗耳朵、狗鼻子），为了与 Teacher 的全局表示保持一致，它必须学习局部与整体之间的对应关系（Local-to-Global Correspondence），从而逐渐形成以对象为中心（Object-centric）的表示。如果 Teacher 也只输入 Local View，那么 Student 只需要学习"局部对应局部"，而无需理解这些局部属于哪个完整对象，最终学到的更多是纹理、边缘等低层特征，而不是具有语义的对象表示。
+
 
 这就是local-to-global correspondence。
